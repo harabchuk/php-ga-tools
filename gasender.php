@@ -25,7 +25,6 @@ class GaSender
 
 	function send(array $payload){
 		$data = array_merge($payload, array('v'=>1, 'tid'=>$this->trackingId, 'cid'=>$this->clientId));
-		print_r($data);
 		$url = 'http://www.google-analytics.com/collect';
 		$content = http_build_query($data); 
 		$content = utf8_encode($content); // The payload must be UTF-8 encoded.
