@@ -8,7 +8,7 @@ Google Analytics helper class for sending hits using the Measurement protocol
 include "gasender.php";
 use PhpGaTools;
 
-$ga = new \GaTools\GaSender('UA-XXXXX-1', '40702790-327f-47f7-bb09-aa797e86bbf0');
+$ga = new \PhpGaTools\GaSender('UA-XXXXX-1', '40702790-327f-47f7-bb09-aa797e86bbf0');
 $payload = $ga->event('Form', 'Submit', 'Footer', 10);
 $ga->send($payload);
 ```
@@ -21,18 +21,18 @@ include "gasender.php";
 include "ecommerce.php";
 use PhpGaTools;
 
-$ga = new \GaTools\GaSender('UA-XXXXX-1', '40702790-327f-47f7-bb09-aa797e86bbf0');
-$ec = new \GaTools\EnhancedEcommerce();
+$ga = new \PhpGaTools\GaSender('UA-XXXXX-1', '40702790-327f-47f7-bb09-aa797e86bbf0');
+$ec = new \PhpGaTools\EnhancedEcommerce();
 
 $products = array(
-		array('id'=>'00411', 'name'=>'The Jungle Books', 'brand'=>'Rudyard Kipling', 'price'=>330, 'qty'=>1, 'category'=>'Classics'),
-		array('id'=>'00412', 'name'=>'Just So Stories', 'brand'=>'Rudyard Kipling', 'price'=>350, 'qty'=>2, 'category'=>'Classics'),
+	array('id'=>'00411', 'name'=>'The Jungle Books', 'brand'=>'Rudyard Kipling', 'price'=>330, 'qty'=>1, 'category'=>'Classics'),
+	array('id'=>'00412', 'name'=>'Just So Stories', 'brand'=>'Rudyard Kipling', 'price'=>350, 'qty'=>2, 'category'=>'Classics'),
 );
 
 // merge two payloads: event and the purchase
 $payload = array_merge(
-  $ga->event('Ecommerce', 'Event'),
-  $ec->purchase('0032', '1030', $products)
+	$ga->event('Ecommerce', 'Event'),
+	$ec->purchase('0032', '1030', $products)
 );
 
 $ga->send($payload);
