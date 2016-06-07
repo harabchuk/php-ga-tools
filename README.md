@@ -32,15 +32,47 @@ $products = array(
 	array('id'=>'00411', 'name'=>'The Jungle Books', 'brand'=>'Rudyard Kipling', 'price'=>330, 'qty'=>1, 'category'=>'Classics'),
 	array('id'=>'00412', 'name'=>'Just So Stories', 'brand'=>'Rudyard Kipling', 'price'=>350, 'qty'=>2, 'category'=>'Classics'),
 );
+$orderId = '0032';
+$orderRevenue = 1030;
 
 // merge two payloads: event and the purchase
 $payload = array_merge(
 	$ga->event('Ecommerce', 'Event'),
-	$ec->purchase('0032', '1030', $products)
+	$ec->purchase($orderId, $orderRevenue, $products)
 );
 
 $ga->send($payload);
 ```
+### Check for errors and debugging
+
+Check the last error
+
+```php
+...
+...
+$ok = $ga->send($payload);
+if(!$ok){
+  print($ga->lastError);
+}
+```
+
+Enable debugging
+
+```php
+...
+...
+$ga->debug = true;
+$ok = $ga->send($payload);
+if(!$ok){
+  print($ga->lastError);
+}
+// print debugging info
+print_r($ga->lastInfo);
+
+// print last payload
+print_r($ga->lastPayload);
+```
+
 
 ### Other hits
 Fill free to add other measurement protocol hits.
