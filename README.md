@@ -35,7 +35,8 @@ $products = array(
 $orderId = '0032';
 $orderRevenue = 1030;
 
-// merge two payloads: event and the purchase
+// merge two payloads: event and the purchase, enhanced ecommerce payloads are
+// always sent with an event
 $payload = array_merge(
 	$ga->event('Ecommerce', 'Event'),
 	$ec->purchase($orderId, $orderRevenue, $products)
