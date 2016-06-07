@@ -8,7 +8,9 @@ Google Analytics helper class for sending hits using the Measurement protocol
 include "gasender.php";
 
 $clientId = '...'; // Google Analytics Client ID
-$ga = new \PhpGaTools\GaSender('UA-XXXXX-1', clientId);
+$trackingId = 'UA-XXXXX-1'; // From your config
+
+$ga = new \PhpGaTools\GaSender($trackingId, $clientId);
 $payload = $ga->event('Form', 'Submit', 'Footer', 10);
 $ga->send($payload);
 ```
@@ -21,7 +23,9 @@ include "gasender.php";
 include "ecommerce.php";
 
 $clientId = '...'; // Google Analytics Client ID
-$ga = new \PhpGaTools\GaSender('UA-XXXXX-1', $clientId);
+$trackingId = 'UA-XXXXX-1'; // From your config
+
+$ga = new \PhpGaTools\GaSender($trackingId, $clientId);
 $ec = new \PhpGaTools\EnhancedEcommerce();
 
 $products = array(
