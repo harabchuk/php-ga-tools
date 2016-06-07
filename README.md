@@ -6,9 +6,9 @@ Google Analytics helper class for sending hits using the Measurement protocol
 <?php
 
 include "gasender.php";
-use PhpGaTools;
 
-$ga = new \PhpGaTools\GaSender('UA-XXXXX-1', '40702790-327f-47f7-bb09-aa797e86bbf0');
+$clientId = '...'; // Google Analytics Client ID
+$ga = new \PhpGaTools\GaSender('UA-XXXXX-1', clientId);
 $payload = $ga->event('Form', 'Submit', 'Footer', 10);
 $ga->send($payload);
 ```
@@ -19,9 +19,9 @@ $ga->send($payload);
 
 include "gasender.php";
 include "ecommerce.php";
-use PhpGaTools;
 
-$ga = new \PhpGaTools\GaSender('UA-XXXXX-1', '40702790-327f-47f7-bb09-aa797e86bbf0');
+$clientId = '...'; // Google Analytics Client ID
+$ga = new \PhpGaTools\GaSender('UA-XXXXX-1', $clientId);
 $ec = new \PhpGaTools\EnhancedEcommerce();
 
 $products = array(
@@ -39,7 +39,7 @@ $ga->send($payload);
 ```
 
 ### Other hits
-Fill free to add other measurement protocol hits. 
+Fill free to add other measurement protocol hits.
 
 ### Links
 [Hit Builder](https://ga-dev-tools.appspot.com/hit-builder/)
