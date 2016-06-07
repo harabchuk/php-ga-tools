@@ -3,7 +3,7 @@
     Enhanced Ecommerce Payloads
 */
 
-namespace GaTools;
+namespace PhpGaTools;
 
 class EnhancedEcommerce
 {
@@ -32,4 +32,3 @@ class EnhancedEcommerce
 	}
 }
 ?>
-
