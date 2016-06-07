@@ -73,7 +73,14 @@ print_r($ga->lastInfo);
 // print last payload
 print_r($ga->lastPayload);
 ```
+### Encodings support
 
+If you use an encoding different from UTF8 add it to the constructor.
+
+Let's say you use CP1251.
+```php
+$ga = new \PhpGaTools\GaSender($trackingId, $clientId, 'CP1251');
+```
 
 ### Other hits
 Fill free to add other measurement protocol hits.
