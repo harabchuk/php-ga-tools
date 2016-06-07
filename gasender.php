@@ -10,10 +10,12 @@ class GaSender
 	var $lastError='';
 	var $lastInfo='';
 	var $lastPayload='';
+	var $encoding='';
 
-	function __construct($trackingId, $clientId){
+	function __construct($trackingId, $clientId, $encoding=''){
 		$this->trackingId=$trackingId;
 		$this->clientId=$clientId;
+		$this->encoding=$encoding;
 	}
 
 	function event($category, $action, $label=null, $value=null){
@@ -28,15 +30,23 @@ class GaSender
 	}
 
 	function send(array $payload){
-		// remove empty values, GA does not accept it
+		// remove empty values except zeros. GA does not accept it
 		$cleanedPayload = array_filter($payload, function($v){
 				return ($v===0 ? true : !empty($v));
 		});
+
 		$data = array_merge($cleanedPayload, array('v'=>1, 'tid'=>$this->trackingId, 'cid'=>$this->clientId));
+
+		if($this->encoding){
+			array_walk($data, function(&$value){
+					$value=iconv($this->encoding, 'UTF8', $value);
+			});
+		}
+
 		$url = 'http://www.google-analytics.com/collect';
 		$content = http_build_query($data);
 		$content = utf8_encode($content);
-		$user_agent = 'Php GA Tools (metricexpert.com)';
+		$user_agent = 'Php GA Tools (https://github.com/harabchuk/php-ga-tools)';
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
